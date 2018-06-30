@@ -26,8 +26,7 @@ function serveStaticFile(res, path, contentType, responseCode){
             break;
         
         default:
-            res.writeHead(404, { 'Content-Type': 'text/plain'});
-            res.end('Not Found');
+            serveStaticFile(res, '/public/404.html', 'text/html');
             break;
     }
     
