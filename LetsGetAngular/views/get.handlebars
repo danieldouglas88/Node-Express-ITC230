@@ -1,0 +1,16 @@
+    {{#if queryString}}
+<h1>Details:</h1>
+    <h2> <li>Breed: {{dogsArray.type}}</li> </h2>
+    <h2> <li>Color: {{dogsArray.color}} </li></h2>
+    <h2> <li>Local: {{dogsArray.local}}</li> </h2>
+
+{{else}}
+User query string to search for specific array element.
+<br>
+All array elements: <br><hr>
+
+{{#each allDogs}}
+    <h2> <li>Breed: {{type}}</li> </h2>
+    <h2> <li>Color: {{color}} </li></h2>
+    <h2> <li>Local: {{local}}</li> </h2><hr>{{/each}}
+{{/if}}
