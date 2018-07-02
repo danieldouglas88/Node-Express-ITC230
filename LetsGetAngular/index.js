@@ -25,7 +25,8 @@ app.get('/delete', function(req, res) {
 
 app.get('/about', function(req, res) { 
   res.render('about', {pageName: "about", title: "About"} ); 
-});
+});s
+
 
 app.get('/', function(req, res) { 
   res.render('home', {pageName: "index", title: "Home" }); 

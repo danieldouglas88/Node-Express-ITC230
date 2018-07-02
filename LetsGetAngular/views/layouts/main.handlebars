@@ -33,10 +33,7 @@
             </li>
                 <li class="nav-item">
               <a class="nav-link" href="get">Get</a>
-            </li>
-                          <li class="nav-item">
-              <a class="nav-link" href="delete">Delete</a>
-            </li>
+            </li>      
             </ul>
           </div>
       </div>
@@ -61,6 +58,12 @@
 
       <div class="jumbotron">
           <h1 class="display-1">{{queryString}} </h1>
+          {{#if queryString}}
+          <button type="button" class="btn btn-primary btn-lg btn-block">
+Breed: {{dogsArray.type}} |
+      Color: {{dogsArray.color}} |
+      Local: {{dogsArray.local}}</button>
+          {{/if}}
         <ul>
             <hr>
             {{{body}}}

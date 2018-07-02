@@ -1,10 +1,14 @@
 'use strict'
 
-let dogs = [{"type":"pitbull", "color": "yellow", "local": true},
+let dogs = [
+            {"type":"pitbull", "color": "yellow", "local": true},
             {"type":"golden retriever", "color": "orange", "local": false},
             {"type":"labrador", "color": "yellow", "local": false},
             {"type":"poodle", "color": "white & black", "local": true},
-            {"type":"samoyed", "color": "white", "local": true}];
+            {"type":"samoyed", "color": "white", "local": true},
+            {"type":"husky", "color": "grey", "local": true},
+            {"type":"terrier", "color": "white & grey", "local": false},
+           ];
 
 exports.getDog = function(typeOfDog){
     
@@ -25,4 +29,8 @@ exports.deleteDog = function(typeOfDog){
 
 exports.getAllDogs = function(){
     return dogs;
+}
+
+exports.create = function(type, color, local){
+    dogs.push({"type": type, "color": color, "local": local});
 }
