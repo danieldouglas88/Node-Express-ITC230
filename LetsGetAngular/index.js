@@ -22,6 +22,10 @@ app.get('/delete', function(req, res) {
   res.render('delete', {queryString: req.query.title, pageName: "delete", title: "Delete", deleteDog: dogs.deleteDog(req.query.title) }); 
 });
 
+app.get('/create', function(req, res) { 
+  res.render('create', {queryString: req.query.title, queryStringTwo: req.query.color, queryStringThree: req.query.local, pageName: "create", title: "Create", createDog: dogs.create(req.query.title, req.query.color, req.query.local )}); 
+});
+
 
 app.get('/about', function(req, res) { 
   res.render('about', {pageName: "about", title: "About"} ); 

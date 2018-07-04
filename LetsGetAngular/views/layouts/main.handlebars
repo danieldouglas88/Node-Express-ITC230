@@ -32,8 +32,8 @@
               <a class="nav-link" href="about">About</a>
             </li>
                 <li class="nav-item">
-              <a class="nav-link" href="get">Get</a>
-            </li>      
+              <a class="nav-link" href="get">Get, Add & Delete</a>
+            </li>         
             </ul>
           </div>
       </div>
@@ -58,14 +58,32 @@
 
       <div class="jumbotron">
           <h1 class="display-1">{{queryString}} </h1>
+          
           {{#if queryString}}
+          {{#unless queryStringTwo}}
+          
           <button type="button" class="btn btn-primary btn-lg btn-block">
-Breed: {{dogsArray.type}} |
+      Breed: {{queryString}} |
       Color: {{dogsArray.color}} |
       Local: {{dogsArray.local}}</button>
+          <br>
+          {{/unless}}
           {{/if}}
+          
+        
+        {{#if queryStringTwo}}
+        {{#if queryStringThree}}
+
+          <button type="button" class="btn btn-primary btn-lg btn-block">
+        Breed: {{queryString}} |
+      Color: {{queryStringTwo}} |
+      Local: {{queryStringThree}}
+          </button>
+          
+          {{/if}}
+          {{/if}}
+          
         <ul>
-            <hr>
             {{{body}}}
 <br><hr>
           <li>
