@@ -1,0 +1,25 @@
+<style>
+    #goog {
+    float: right;
+}
+</style>
+<div id="goog" class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+  <div class="card-header">Google Search</div>
+  <div class="card-body">
+    <h4 class="card-title">Search for "{{queryString}}" on Google.</h4>
+  <input type="button" class="btn btn-primary" onclick="location.href='https://www.google.com/search?q={{queryString}}';" value="Click here."/> <br><hr>
+  </div>
+</div>
+ <hr>
+{{#if queryString}}
+    <h2> <li>Color: {{dogsArray.color}}  </li></h2>
+    <h2> <li>Local: {{dogsArray.local}} </li> </h2>
+          <br>
+          {{/if}}
+
+  <input type="button" class="btn btn-danger" onclick="location.href='delete?title={{queryString}}';" value="Delete from Array"/> <br><hr>
+
+<h4> Go to the <a href="/">Home</a>
+ page.</h4>
+
+

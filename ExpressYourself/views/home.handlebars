@@ -1,0 +1,32 @@
+<script> 
+    function findDog(){
+    var x = document.getElementById("dogInfo").elements[0].value;
+    window.location.href = "detail?title=" + x;
+    }
+</script>
+
+<h1> Search for Dog: </h1>
+<hr>
+<form id="dogInfo">
+  Breed: <input><br> <br>
+    <input type="button" class="btn btn-primary btn-lg" onclick="findDog()" value="Search" />
+</form> 
+
+
+<br><hr>
+<h1>View and Delete:</h1> <hr>
+
+{{#each allDogs}}
+
+    <h2> <li>Breed: {{type}}</li> </h2>
+    <h2> <li>Color: {{color}} </li></h2>
+    <h2> <li>Local: {{local}}</li> </h2>
+<form>
+  <input type="button" class="btn btn-info" onclick="location.href='detail?title={{type}}';" value="Details" />
+  <input type="button" class="btn btn-danger" onclick="location.href='delete?title={{type}}';" value="Delete from Array"/>
+</form>
+<br><hr>
+
+{{/each}}
+
+
