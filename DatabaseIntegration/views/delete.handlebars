@@ -1,10 +1,8 @@
 
-    {{#if dogsArray.title}}
-    <h2> "{{queryString}}" has been successfully deleted. There are now {{dbLength}} dogs left in the database.</h2>
-
-<br><hr>
-<h4> Go to the <a href="/">Home</a>
- page.</h4>
+{{#if del}}
+<h2> "{{queryString}}" has been successfully deleted. There are now {{dbLength}} dogs left in the database.</h2>
+        <br><hr>
+        <h4> Go to the <a href="/">Home</a> page.</h4>
 {{else}}
-<h2>We can't find this in our database.</h2>
-    {{/if}}
+<h2>We can't find that record in our datbase.</h2>
+{{/if}}

@@ -1,7 +1,7 @@
 'use strict'
 
-var Dawg = require("./models/dog"); // db model
-var dbMethods = require("./lib/dbmethods"); // db methods
+let Dawg = require("./models/dog"); // db model
+let dbMethods = require("./lib/dbmethods"); // db methods
 
 const express = require("express");
 const app = express();
@@ -15,6 +15,7 @@ let handlebars =  require("express-handlebars")
 app.engine("handlebars", handlebars.engine);
 app.set("view engine", "handlebars");
 
+//detail page with delete options
 app.get('/detail', (req,res) => {
     Dawg.findOne({ title: req.query.title}, (err, result) => {
         if (err) return next(err);
@@ -27,7 +28,7 @@ app.get('/delete', (req,res) => {
     Dawg.remove({ title:req.query.title }, (err, result) => {
         if (err) return next(err);
         Dawg.countDocuments((err, total) => {
-   res.render('delete', {dogsArray: result, queryString: req.query.title, pageName: "delete", title: "Delete", dbLength: total})
+   res.render('delete', {queryString: req.query.title, pageName: "delete", title: req.query.title, dbLength: total, del: result.n}) 
         });
     });
 });
@@ -38,15 +39,21 @@ app.get('/create', (req, res) => {
         res.render('create', {queryString: req.query.title, title: req.query.title, color: req.query.color, local: req.query.local, pageName: 'Create'});
    }); 
 
-app.get('/', (req, res) => { 
-  res.render('home', {pageName: "index", title: "Home", queryString: "home", allDogs: dbMethods.returnAll() });
+//home page
+app.get('/', (req, res) => {  
+    Dawg.find({}, (err, items) => {
+  if (err) return next(err);
+        console.log(items);
+        res.render('home', {pageName: "index", title: "Home", queryString: "home", allDog: items });
+    });
    });
 
+//about page
 app.get('/about', (req, res) => { 
   res.render('about', {pageName: "about", title: "About"}); 
 });
 
-// define 404 handler
+//404 handler
 app.use(function(req,res) {
   res.render('404', {pageName: "404", title: "404 - cant find"}); 
 });
