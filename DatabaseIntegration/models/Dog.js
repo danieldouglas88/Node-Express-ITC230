@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 // remote db connection settings. For security, connectionString should be in a separate file not committed to git
-var connectionString = 'mongodb://mongodbdaniel:Qazxsw!123@ds137651.mlab.com:37651/dogsnodejs'
+var connectionString = 'mongodb://XXXXXXXXXXXXXX:ZZZZZZZZZZZ@ds137651.mlab.com:37651/dogsnodejs'
 mongoose.connect(connectionString, { useNewUrlParser: true });
 
 // local db connection settings 
