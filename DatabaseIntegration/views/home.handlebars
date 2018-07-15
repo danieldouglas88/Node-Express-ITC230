@@ -1,0 +1,54 @@
+<style>
+    .formDeux {
+        float: right; }
+</style>
+
+<script> 
+    function findDog(){
+    var xx = document.getElementById("dogInfo").elements[0].value;
+    window.location.href = "detail?title=" + xx;
+    }
+    
+    function createDog(){
+    var x = document.getElementById("dogInfoTwo").elements[0].value;
+    var y = document.getElementById("dogInfoTwo").elements[1].value;
+    var z = document.getElementById("dogInfoTwo").elements[2].value;
+    window.location.href = "create?title=" + x + "&color=" + y + "&local=" + z;
+    }    
+</script>
+
+<form id="dogInfoTwo" class="formDeux">
+    <h1> Add New Dog: </h1>
+    <br>
+  <h4>Breed:</h4> 
+    <input type="text" name="fname" ><br>
+    <h4>Color:</h4> <input type="text" name="lname" ><br>
+    <h4>Local:</h4> <input type="text" name="lname" value="true" ><br>
+    <br>
+    <input type="button" class="btn btn-info" onclick="createDog()" value="Add to Database" />
+</form> 
+
+<h1> Search for Dog: </h1>
+<hr>
+<form id="dogInfo">
+   <h4>Breed:</h4> <input><br> <br>
+    <input type="button" class="btn btn-primary btn-lg" onclick="findDog()" value="Search" />
+</form> 
+
+
+<br><hr>
+<h1>View and Delete:</h1> <hr>
+
+{{!#each title}}
+
+    <h2> <li>Breed: {{title}}</li> </h2>
+
+<form>
+  <input type="button" class="btn btn-info" onclick="location.href='detail?title={{type}}';" value="Details" />
+  <input type="button" class="btn btn-danger" onclick="location.href='delete?title={{type}}';" value="Delete from Array"/>
+</form>
+<br><hr>
+
+{{!/each}}
+
+
