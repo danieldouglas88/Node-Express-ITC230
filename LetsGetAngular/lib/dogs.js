@@ -10,8 +10,7 @@ let dogs = [
             {"type":"terrier", "color": "white & grey", "local": false},
            ];
 
-exports.getDog = function(typeOfDog){
-    
+exports.getDog = (typeOfDog) => {
     for (var i=0; i<dogs.length; i++){
         if(dogs[i].type == typeOfDog){
             return dogs[i];
@@ -19,7 +18,7 @@ exports.getDog = function(typeOfDog){
     }
 }
 
-exports.deleteDog = function(typeOfDog){
+exports.deleteDog = (typeOfDog) => {
     for (var i=0; i<dogs.length; i++){
         if(dogs[i].type == typeOfDog){
             dogs.splice(i, 1);
@@ -27,10 +26,10 @@ exports.deleteDog = function(typeOfDog){
     }
 }
 
-exports.getAllDogs = function(){
+exports.getAllDogs = () => {
     return dogs;
 }
 
-exports.create = function(type, color, local){
+exports.create = (type, color, local) =>{
     dogs.push({"type": type, "color": color, "local": local});
 }
