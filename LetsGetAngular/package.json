@@ -1,0 +1,26 @@
+{
+  "name": "letsgetmodular",
+  "version": "1.0.0",
+  "description": "node js",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danieldouglas88/REST-API-nodeJS-expressJS.git"
+  },
+  "author": "Daniel Douglas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danieldouglas88/REST-API-nodeJS-expressJS/issues"
+  },
+  "homepage": "https://github.com/danieldouglas88/REST-API-nodeJS-expressJS#readme"
+}
