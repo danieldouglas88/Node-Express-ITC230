@@ -43,7 +43,7 @@ app.get('/api/v1/dogs/delete/:type', (req,res) => {
         if (err) return next(err);
         Dawg.countDocuments((err, total) => {
             if (result.n){
-            res.send(req.params.type + " has been removed. There are " + total + " dogs left in the database.")
+            res.send("{'title': '" + (req.params.type + "'} has been removed. There are " + total + " dogs left in the database."))
             }else{
                 res.send("404");
             }
@@ -56,7 +56,7 @@ app.get('/api/v1/dogs/create/:type/:color/:local', (req, res) => {
     dbMethods.createDog(req.params.type, req.params.color, req.params.local);
     Dawg.findOne({ title: req.params.type}, (err, result) => {
         if (err) return next(err);
-        res.send(result);
+        res.send({"title":req.params.type, "color":req.params.color, "local":req.params.local});
      });  
 }); 
 
