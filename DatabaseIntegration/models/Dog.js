@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var connectionString = 'mongodb://mongodbdaniel:Qazxsw!123@ds137651.mlab.com:37651/dogsnodejs'; //see Canvas for value
+var connectionString = ''; //see Canvas for value
 mongoose.connect(connectionString, { useNewUrlParser: true });
 
 // local db connection settings 
