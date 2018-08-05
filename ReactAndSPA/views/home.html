@@ -1,0 +1,150 @@
+<html>
+<head>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script> 
+    
+<script type="text/babel">
+    // define app container Component
+    class Dogs extends React.Component{
+      constructor(props){
+        // Pass props to parent class
+        super(props);
+        // Set initial state w/ hard-coded data
+        this.state = {
+          data: {{{dogJSON}}},
+          filter: "", // search term 
+          curItem: {} // current selected item 
+        };
+        // bind App context to functions for reference in sub components
+        this.onChange = this.onChange.bind(this);
+
+this.onDelete = this.onDelete.bind(this);
+        this.onClear = this.onClear.bind(this);
+      }
+ 
+      // show item details
+      showDetails(event){
+        // event.target is list item clicked
+        let editItem = this.state.data.find((item) => {
+          return item._id == event.target.id;
+        });
+        this.setState({curItem: editItem});
+      }
+      onClear() {
+        this.setState({curItem: {}});
+      }
+      // handle detail changes
+      onChange(event) {
+        var newItem = this.state.curItem;
+        newItem[event.target.name] = event.target.value
+        this.setState({curItem: newItem});
+      }
+      
+      // Handle item delete
+      onDelete(){
+        let id = this.state.curItem._id;
+        
+        fetch("/api/v1/dogs/delete/" + id).then((response) => {
+          return response.json();
+        }).then((results) => {
+          // Filter all items except the one to be removed
+          const remainder = this.state.data.filter((item) => {
+            return item._id !== id;
+          });
+          // Update state with new array
+          this.setState({data: remainder});
+          this.setState({curItem: {}});
+        });
+      }
+    
+      render() {
+        // Render JSX
+        return <div>
+            <ItemList
+              items={this.state.data} 
+              filter={this.state.filter}
+              show={this.showDetails.bind(this)}
+            />
+          <ItemDetails item={this.state.curItem} change={this.onChange} />
+     <button class="btn btn-danger btn-lg" onClick={this.onDelete}>Delete</button>
+          </div>;
+      }
+    }
+    
+    const ItemList = ({items, filter, show}) => {
+      // return items that match search entry field, or all items if no entry
+      const itemNodes = items.map((item) => {
+        if (!filter || item.title.toLowerCase().includes(filter)) { 
+            return <h4><li id={item._id}>{item.title}</li> 
+                <button class="btn btn-primary" id={item._id} key={item._id} onClick={show}> Details</button>
+
+                <br />
+
+                <hr /></h4>
+        }
+      });
+      return <ul>{itemNodes}</ul>;
+    }
+    class ItemDetails extends React.Component {
+      
+      render() {
+        return (
+          <div>
+            <h2>Details:</h2>
+            <form onChange={this.props.change}>
+              <h1>{this.props.item.title || ""} </h1>
+              <h4>Color: {this.props.item.color}</h4>
+            </form>
+          </div>
+        );
+      }      
+    }
+  
+    class ItemDetails_ extends React.Component {
+      constructor(props) {
+        super(props);
+        // state values must not be 'undefined', to avoid 'uncontrolled' form warning
+        this.state = { 
+          _id: this.props.item._id || "",
+          title: this.props.item.title || "",
+          color: this.props.item.color || "",
+          local: this.props.item.local || ""
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+      }
+      componentWillReceiveProps(nextProps) {
+        this.setState({
+          _id: nextProps.item._id || "",
+          title: nextProps.item.title || "",
+          color: nextProps.item.color || "",
+          local: nextProps.item.local || ""
+        });
+      }
+      handleChange (event) {
+        this.setState({[event.target.name]: event.target.value});
+      };
+
+      handleDelete (event) {
+        this.props.delete(this.state._id);
+      };
+        
+      render() {
+          return (
+          <div>
+            <h3>Details:</h3>
+            <button class="btn btn-danger btn-lg" onClick={this.handleDelete} >Delete</button>
+          </div>
+          );
+      }
+    }
+    ReactDOM.render(<Dogs/>, document.getElementById('root'));
+</script>
+    
+    </head>
+    <body>
+        <div id="root"></div>
+
+    </body>
+</html> 
