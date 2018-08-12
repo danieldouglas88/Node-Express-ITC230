@@ -1,0 +1,91 @@
+<html>
+<head>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script> 
+    
+    <style>#at{color: white;}</style>
+    
+<script type="text/babel">
+
+class Dogs extends React.Component{
+    state = {
+        dogs: {{{dogJSON}}},
+        title: "", 
+        color: "",
+        del: "",
+        mel:""
+}
+
+//iterate over array of objects which includes all the dogs and their info from db
+allDogs = () => {
+    if(this.state.dogs) return <ul > {this.state.dogs.map(dog => <li key={dog.title}>{dog.title} <br /><button className="btn btn-primary" onClick={() => this.clicker(dog.title, dog.color)}>Details</button><hr/></li>)}</ul>;
+    return <p>Doesnt exist!</p>;
+}
+
+//make the form values and DB content dissapear
+eraser = () => {
+  this.setState({dogs: [], title: "", color: "", del: "", mel: ""})
+}
+
+//show all dogs in DB
+all = () => {
+    this.setState({dogs: {{{dogJSON}}}, title: "", del: "", mel: ""})
+}
+
+//update or create new dog
+update = (dog, color) => {
+    this.setState({title: dog, mel: <h2>Deleted: <br /> <iframe src={"/api/v1/dogs/delete/" + dog} width="700"></iframe></h2> ,del: <h2>New Entry: <br /><iframe src={"/api/v1/dogs/create/" + document.getElementById("inputDefault").value + "/" + document.getElementById("inputDefault2").value + "/true"} width="700"></iframe></h2>})
+}
+
+//details for dog
+clicker = (dog, color) => {
+    this.setState({dogs: [], title: dog, color: color, mel: "", del: <div className="card text-white bg-secondary mb-3" >
+  <div className="card-header">Google Search</div>
+  <div className="card-body">
+    <h4 className="card-title">Search for "{dog}" on Google.</h4>
+<a  id="at" href={"https://www.google.com/search?q=" + dog}>Click here</a>
+  </div>
+</div>})
+}
+
+//delete dog
+deleter = (dog) => {
+    this.setState({title: "", color: "", del: <iframe src={"/api/v1/dogs/delete/" + dog} width="700"></iframe>})
+}
+
+//for on change events
+onChange = (event) => {
+        this.setState({[event.target.name]: event.target.value});
+}
+
+//render widgets and related functionality
+render() {         
+    return(      
+    <div>
+    <ul>{this.allDogs()}
+    </ul>
+{this.state.mel}
+{this.state.del}
+                        <div className="form-group">
+Breed:  <input type="text" className="form-control" defaultValue={this.state.title} onChange={this.onChange} id="inputDefault" />
+Color:  <input type="text" className="form-control" defaultValue={this.state.color} onChange={this.onChange} id="inputDefault2" />
+Local: <input type="text" className="form-control" defaultValue="true" onChange={this.onChange} id="inputDefault3" />
+</div>                     
+<br />                           
+<button className="btn btn-primary btn-lg" onClick={this.all}>All</button>
+<button className="btn btn-primary btn-lg" onClick={() => this.update(this.state.title, this.state.color)}>Update</button>
+<button className="btn btn-warning btn-lg" onClick={this.eraser}>Clear</button>
+<button className="btn btn-danger btn-lg" onClick={() => this.deleter(this.state.title)}>Delete</button>
+    </div>         );
+}
+} 
+                
+ReactDOM.render(<Dogs/>, document.getElementById('root'));
+</script>
+    
+    </head>
+    <body>
+        <div id="root"></div>
+    </body>
+</html> 
